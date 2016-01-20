@@ -1,0 +1,121 @@
+var fs = require('fs');
+
+module.exports = function (grunt) {
+    'use strict';
+    
+    grunt.initConfig({
+        prop: 'some property',
+        
+        pkg: grunt.file.readJSON('package.json'),
+        
+        running: {
+            taskOwner: 'Mike',
+            src: 'js/somefile.js',
+            dest: 'somefile.js'
+        },
+        
+        runningAsync: {
+            taskOwner: 'Mike',
+            src: 'js/somefile.js',
+            dest: 'somefile.js',
+            options: {
+                // grunt uses lodash for templating.
+                comment: '/* <%= prop %> */',
+                author: '/* <%= pkg.author %> */'
+            }
+        },
+        
+        multitask: {
+            config1: {
+                message: 'this is config1',
+                files: {
+                    'someotherfile.js': 'js/somefile.js',
+                    'anotherfile.js': 'js/somefile.js'
+                }
+            },
+            config2: {
+                message: 'this is config2',
+                files: [
+                    {
+                        src: 'js/somefile.js',
+                        dest: 'yetanotherfile.js'
+                    },
+                    {
+                        src: 'js/somefile.js',
+                        dest: 'yetanotherfile2.js'
+                    }
+                ]
+            }
+        }
+    });
+    
+    //basic task.
+    //
+    // call:  grunt running:"here I am..."
+    grunt.registerTask('running', 'An example task', function (arg1) {
+        grunt.config.requires('running.taskOwner');
+        grunt.log.writeln('grunt is running task named: ' + this.name);
+        grunt.log.writeln('task owner: ' + grunt.config.get('running.taskOwner'));
+        
+        grunt.log.writeln('agr1 = ' + arg1);
+        
+        
+    });
+    
+    //async task.
+    //
+    // call:  grunt running:"here I am..."
+    grunt.registerTask('runningAsync', 'An example Async task', function (arg1) {
+        // invoke the async method of the current object.
+        // this returns a handle to a callback function.
+        var done = this.async();
+        var comment = this.options().comment;
+        var author = this.options().author;
+        
+        grunt.log.writeln('grunt is running task named: ' + this.name);
+        
+        grunt.log.writeln('agr1 = ' + arg1);
+        
+        grunt.log.writeln(grunt.config.get('running.src'));
+        
+        fs.readFile(grunt.config.get('runningAsync.src'), function (error, data) {
+
+            grunt.log.writeln("my data ===" + data);
+            fs.writeFile(grunt.config.get('runningAsync.dest'), author + '\n' + comment + '\n' + data);
+            // execute the async callback furnction
+            done();
+        });
+        
+        
+    });
+    
+    // multi task
+    grunt.registerMultiTask('multitask', 'An example multi task', function (arg1) {
+        // allows definition of different configurations for the task 
+        // (known as 'Targets') in the .initConfig method.
+        grunt.log.writeln(this.data.message);
+        grunt.log.writeln('grunt is running task named: ' + this.name);
+        grunt.log.writeln('agr1 = ' + arg1);
+        
+        this.files.forEach(function (file) {
+            //
+            grunt.log.writeln('........' + file.src);
+            grunt.log.writeln(file.src[0] + ' ' + file.dest);
+        });
+    });
+ 
+    //alias task.
+    // 'run' is an alias for other tasks.
+    // array[] is a list of tasks to be run.
+    grunt.registerTask('run', 'run all tasks',
+                       ['running:"first pass"',
+                        'running:"second pass"',
+                        'runningAsync:"pass1"',
+                        'runningAsync:"pass2"',
+                        'multitask',
+                        'multitask:config1:"run with config1 specified.',
+                        'multitask::"run all configs..."'
+                       ]);
+    
+    
+}
