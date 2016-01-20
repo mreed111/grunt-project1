@@ -127,6 +127,13 @@ module.exports = function (grunt) {
             unit: {
                 configFile: 'karma.conf.js'
             }
+        },
+        gitadd: {
+            dist: {
+                options: {
+                    all: true
+                }
+            }
         }
     });
      
