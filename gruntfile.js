@@ -43,7 +43,7 @@ module.exports = function (grunt) {
                 sourceMap: true,
                 // Map the uglified source file back to 
                 //the original coffee script.
-                sourceMapIn: 'dist/js/package.js.map' 
+                sourceMapIn: 'dist/js/package.js.map'
             }
         },
         requirejs: {
@@ -74,7 +74,7 @@ module.exports = function (grunt) {
                     {
                         src: 'node_modules/grunt-contrib-requirejs/node_modules/requirejs/require.js',
                         dest: 'dist/js/vendor/require.js'
-                    },{
+                    }, {
                         expand: true,   // allows file list to be built dynamically
                         src: ['js/**'],
                         dest: 'dist'
@@ -150,8 +150,8 @@ module.exports = function (grunt) {
     grunt.registerTask('compress', ['uglify', 'requirejs', 'cssmin']);
     
     grunt.registerTask('build:dev', ['pre-build', 'compress', 'copy', 'htmlbuild:dev', 'connect']);
-    grunt.registerTask('build:dist', ['pre-build', 'compress', 'htmlbuild:dist', 'gitadd', 'connect']);
+    grunt.registerTask('build:dist', ['pre-build', 'compress', 'htmlbuild:dist', 'gitadd', 'gitcommit', 'connect']);
     
-}
+};
 
 // see coffeescript.org for more coffee details...

@@ -15,6 +15,7 @@ define(function (require) {
             
             logger.log(testString);
             
+            // a simple test
             expect(console.log).toHaveBeenCalledWith(testString);
         });
     });
