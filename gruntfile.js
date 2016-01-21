@@ -160,7 +160,7 @@ module.exports = function (grunt) {
     
     grunt.registerTask('get-branch', function () {
         var done = this.async();
-        
+        // 
         grunt.util.spawn({
             cmd: 'git',
             args: ['symbolic-ref', 'HEAD', '--short']
