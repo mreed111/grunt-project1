@@ -152,7 +152,7 @@ module.exports = function (grunt) {
         gitrebase: {
             dist: {
                 options: {
-                    branch: '' // custom task 'get-branch' will populate this option.
+                    branch: ''
                 }
             }
         }
@@ -166,6 +166,7 @@ module.exports = function (grunt) {
             args: ['symbolic-ref', 'HEAD', '--short']
         }, function (error, result) {
             grunt.config.set('gitrebase.dist.options.branch');
+            console.log('gitrebase.dist.options.branch');
             done();
         });
     });
