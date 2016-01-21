@@ -18,4 +18,4 @@ define(function (require) {
             expect(console.log).toHaveBeenCalledWith(testString);
         });
     });
-})
+});
