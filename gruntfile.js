@@ -152,7 +152,7 @@ module.exports = function (grunt) {
         gitrebase: {
             dist: {
                 options: {
-                    branch: ''
+                    branch: '' // will be populated by 'get-branch' custom task.
                 }
             }
         }
