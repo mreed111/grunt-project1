@@ -161,7 +161,7 @@ module.exports = function (grunt) {
     grunt.registerTask('get-branch', function () {
         var done = this.async();
         // 
-        grunt.util.spawn({
+        grunt.util.spawn({  // spawn git as a child process.
             cmd: 'git',
             args: ['symbolic-ref', 'HEAD', '--short']
         }, function (error, result) {
