@@ -9,6 +9,7 @@
   "author": "Mike Reed",
   "license": "ISC",
   "devDependencies": {
+    "@mreed111/grunt-get-branchname": "^0.1.0",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.7.0",
     "grunt-contrib-coffee": "^0.13.0",

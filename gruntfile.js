@@ -155,9 +155,20 @@ module.exports = function (grunt) {
                     branch: '' // will be populated by 'get-branch' custom task.
                 }
             }
+        },
+        get_branchname: {
+            dist: {
+                options: {
+                    target: 'gitrebase.dist.options.branch',
+                    quiet: true
+                }
+            }
         }
     });
     
+    /*
+    // this custom task is replaced by the grunt-get-branchname plugin.
+    // custom task definition
     grunt.registerTask('get-branch', function () {
         var done = this.async();
         // 
@@ -170,6 +181,7 @@ module.exports = function (grunt) {
             done();
         });
     });
+    */
      
     grunt.registerTask('default', 'my default task', ['jshint', 'clean', 'coffee', 'sass', 'uglify', 'requirejs', 'cssmin', 'copy', 'htmlbuild:dev', 'connect']);
     
@@ -179,7 +191,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build:dev', ['pre-build', 'compress', 'copy', 'htmlbuild:dev', 'connect']);
     grunt.registerTask('build:dist', ['pre-build', 'compress', 'htmlbuild:dist', 'git',  'connect']);
     
-    grunt.registerTask('git', ['gitadd', 'gitcommit', 'get-branch', 'gitcheckout', 'gitrebase']);
+    grunt.registerTask('git', ['gitadd', 'gitcommit', 'get_branchname', 'gitcheckout', 'gitrebase']);
     
 };
 
