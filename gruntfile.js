@@ -160,7 +160,8 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     target: 'gitrebase.dist.options.branch',
-                    quiet: true
+                    quiet: true,
+                    short: false
                 }
             }
         }
