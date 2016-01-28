@@ -5,7 +5,7 @@ module.exports = function (grunt) {
     
     require('load-grunt-tasks')(grunt);
     
-    grunt.initConfig({
+    //grunt.initConfig({
         //jshint:
         //clean: 
         //coffee:
@@ -17,44 +17,12 @@ module.exports = function (grunt) {
         //htmlbuild:
         //connect:
         //karma:
-        /*gitadd: {
-            dist: {
-                options: {
-                    all: true
-                }
-            }
-        },
-        gitcommit: {
-            dist: {
-                options: {
-                    message: grunt.option('commit-message')
-                }
-            }
-        },
-        gitcheckout: {
-            dist: {
-                options: {
-                    branch: 'master'
-                }
-            }
-        },
-        gitrebase: {
-            dist: {
-                options: {
-                    branch: '' // will be populated by 'get-branch' custom task.
-                }
-            }
-        },*/
-        get_branchname: {
-            dist: {
-                options: {
-                    target: 'gitrebase.dist.options.branch',
-                    quiet: true,
-                    short: false
-                }
-            }
-        }
-    });
+        //gitadd:
+        //gitcommit:
+        //gitcheckout:
+        //gitrebase:
+        //get_branchname:
+    //});
     
     /*
     // this custom task is replaced by the grunt-get-branchname plugin.
