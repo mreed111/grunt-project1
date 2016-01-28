@@ -5,6 +5,7 @@ module.exports = function (grunt) {
     
     require('load-grunt-tasks')(grunt);
     
+    // initConfig object is build on the fly by grunt.loadTasks command.
     //grunt.initConfig({
         //jshint:
         //clean: 
